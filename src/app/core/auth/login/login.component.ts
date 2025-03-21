@@ -1,27 +1,60 @@
 import { Component } from '@angular/core';
-
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule, CommonModule],
   styleUrl: './login.component.scss',
-  template:
-    `
-  <div class="centeredContent">
-  <form>
-  <p>Pagina login</p>
+  template: `
 
-  <input type="text" placeholder="Inserisci il nome" [required]="true" formControlName = "name" [minLength]="4"> <br>
+    <div class="centeredContent">
+      <form [formGroup]="login" (ngSubmit)="onSubmit()">
+        <p>Pagina login</p>
 
-  <input type="password" placeholder="Inserisci password" required="true" > <br>
+        <!-- Name Input -->
+        <input type="text" formControlName="name">
+        <small *ngIf="login.get('name')?.invalid && login.get('name')?.touched">
+          Il nome è richiesto e deve avere almeno 2 caratteri.
+        </small>
+        <br>
 
-  <button> Conferma </button>
+        <!-- Password Input -->
+        <input type="password" formControlName="password">
+        <small *ngIf="login.get('password')?.invalid && login.get('password')?.touched">
+          La password è richiesta e deve avere almeno 6 caratteri.
+        </small>
+        <br>
 
-  </form>
-</div>
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="login.invalid">Conferma</button>
+      </form>
+    </div>
   `
 })
-export class LoginComponent {
 
+export class LoginComponent {
+  login: FormGroup;
+
+  constructor(private formbuilder: FormBuilder) {
+
+    //   //FormGroup ci permette di gestire i componenti dei form come un unico componente
+    this.login = this.formbuilder.group({
+      //Il primo parametro indica la stringa iniziale
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  get form() {
+    return this.login.controls;
+  }
+
+  onSubmit() {
+    if (this.login.invalid) {
+      return;
+    }
+    console.log("Successful login", this.login.value);
+  }
 }
