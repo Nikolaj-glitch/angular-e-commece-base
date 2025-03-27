@@ -5,5 +5,5 @@ import { ProductsComponent } from './features/products/products/products.compone
 export const routes: Routes = [
   { path: 'api/auth/login', component: LoginComponent },
   { path: 'api/products', component: ProductsComponent }
-
+  
 ];

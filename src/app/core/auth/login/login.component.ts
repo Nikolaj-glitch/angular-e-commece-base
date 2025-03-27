@@ -19,14 +19,14 @@ import { Observable } from 'rxjs';
 
         <!-- Name Input -->
         <input type="text" formControlName="name">
-        <small *ngIf="login.get('name')?.invalid && login.get('name')?.touched">
+        <small *ngIf="login.get('name')?.invalid && login.get('name')?.touched"><br>
           Il nome è richiesto e deve avere almeno 2 caratteri.
         </small>
         <br>
 
         <!-- Password Input -->
         <input type="password" formControlName="password">
-        <small *ngIf="login.get('password')?.invalid && login.get('password')?.touched">
+        <small *ngIf="login.get('password')?.invalid && login.get('password')?.touched"><br>
           La password è richiesta e deve avere almeno 6 caratteri.
         </small>
         <br>

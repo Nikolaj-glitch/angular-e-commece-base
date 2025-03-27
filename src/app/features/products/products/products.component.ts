@@ -4,10 +4,14 @@ import { Component } from '@angular/core';
   selector: 'app-products',
   standalone: true,
   imports: [],
-  templateUrl: './products.component.html',
-  styleUrl: './products.component.scss'
+  styleUrl: './products.component.scss',
+  template: `
+  <div>
+    <h1>Prodotti</h1>
+  </div>
+  `
 })
 export class ProductsComponent {
-  
+
 
 }
