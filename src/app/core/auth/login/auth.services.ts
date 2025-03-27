@@ -6,7 +6,7 @@ import { Observable, tap } from 'rxjs';
   providedIn: 'root', //Angular registra AuthService disponibile ovunque nell'app
 })
 export class AuthService {
-  private apiUrl = ''; //nostra API
+  private apiUrl = 'http://localhost:3000/login'; //nostra API
 
   constructor(private http: HttpClient) {}
 
