@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+
 
 @Component({
   selector: 'app-login',
@@ -35,11 +39,13 @@ import { CommonModule } from '@angular/common';
 })
 
 export class LoginComponent {
+  // Devo controllare qui se il JWT token è il mio
+
   login: FormGroup;
 
-  constructor(private formbuilder: FormBuilder) {
+  constructor(private formbuilder: FormBuilder, private http: HttpClient) {
 
-    //   //FormGroup ci permette di gestire i componenti dei form come un unico componente
+    //FormGroup ci permette di gestire i componenti dei form come un unico componente
     this.login = this.formbuilder.group({
       //Il primo parametro indica la stringa iniziale
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -48,7 +54,9 @@ export class LoginComponent {
   }
 
   get form() {
+
     return this.login.controls;
+
   }
 
   onSubmit() {
