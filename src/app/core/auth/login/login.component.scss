@@ -1,4 +1,12 @@
 .centeredContent {
-  text-align: center;
+  height: 100%;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.centeredContent p {
+  margin: 0;
 }
