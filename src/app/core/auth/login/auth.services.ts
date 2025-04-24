@@ -1,18 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-
+import { environment } from '../../../../environment';
 @Injectable({
   providedIn: 'root', //Angular registra AuthService disponibile ovunque nell'app
 })
 export class AuthService {
-  private apiUrl = ''; //nostra API
+  private apiUrl = environment.apiLogin; //nostra API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //invia credenziali al servere e salva il JWT token
   login(credentials: { name: string; password: string }): Observable<any> {
-    return this.http.post<{ token: string }>(this.apiUrl, credentials).pipe(
+
+    return this.http.post<{ token: string }>(this.apiUrl, null, {
+      headers: {
+        'Authorization': "Basic " + btoa(credentials.name + ":" + credentials.password)
+      }
+    }).pipe(
       tap((response) => {
         localStorage.setItem('token', response.token);
       })
