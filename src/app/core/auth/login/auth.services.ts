@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { environment } from '../../../../enviorment';
+import { environment } from '../../../../environment';
 @Injectable({
   providedIn: 'root', //Angular registra AuthService disponibile ovunque nell'app
 })
