@@ -20,21 +20,33 @@ import { response } from 'express';
   template: `
     <div class="centeredContent">
       <form [formGroup]="login" (ngSubmit)="onSubmit()">
-        <p>Pagina login</p>
+        <p>Login</p>
 
         <!-- Name Input -->
-        <input type="text" formControlName="name">
-        <small *ngIf="login.get('name')?.invalid && login.get('name')?.touched">
-          Il nome è richiesto e deve avere almeno 2 caratteri.
-        </small>
-        <br />
+        <input type="text" formControlName="name" placeholder="email" />
+        <div class="error-message-container">
+          <small
+            *ngIf="login.get('name')?.invalid && login.get('name')?.touched"
+          >
+            Il nome è richiesto e deve avere almeno 2 caratteri.
+          </small>
+        </div>
 
         <!-- Password Input -->
-        <input type="password" formControlName="password">
-        <small *ngIf="login.get('password')?.invalid && login.get('password')?.touched">
-          La password è richiesta e deve avere almeno 6 caratteri.
-        </small>
-        <br />
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="password"
+        />
+        <div class="error-message-container">
+          <small
+            *ngIf="
+              login.get('password')?.invalid && login.get('password')?.touched
+            "
+          >
+            La password è richiesta e deve avere almeno 6 caratteri.
+          </small>
+        </div>
 
         <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
 
@@ -44,8 +56,6 @@ import { response } from 'express';
     </div>
   `,
 })
-
-
 export class LoginComponent {
   // Devo controllare qui se il JWT token è il mio
 
