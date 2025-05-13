@@ -8,7 +8,7 @@ import { environment } from '../../../../environment';
 export class AuthService {
   private apiUrl = environment.apiLogin; //nostra API
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //invia credenziali al servere e salva il JWT token
   login(credentials: { name: string; password: string }): Observable<any> {
@@ -31,10 +31,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  //Rimuove il token quando ci si disconnette
-  logout() {
-    localStorage.removeItem('token');
-  }
+  // //Rimuove il token quando ci si disconnette
+  // logout() {
+  //   localStorage.removeItem('token');
+  // }
 
   //Controlla se utente è loggato
   isAuthenticated(): boolean {

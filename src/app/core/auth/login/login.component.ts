@@ -89,7 +89,7 @@ export class LoginComponent {
     this.authservice.login(this.login.value).subscribe({
       next: () => {
         console.log('Login avvenuto con successo!', this.login.value);
-        this.router.navigate(['/dashboard']); //per ora ho messo dashboard una volt avvenuto il login poi vediamo
+        this.router.navigate(['/api/products']); //per ora ho messo dashboard una volt avvenuto il login poi vediamo
       },
       error: (err) => {
         console.error('errore autenticazione', err);
