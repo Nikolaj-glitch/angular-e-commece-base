@@ -45,4 +45,5 @@ Thumbs.db
 
 .env
 environment.ts
-
+package-lock.json
+package.json

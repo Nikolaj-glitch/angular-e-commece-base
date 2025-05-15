@@ -31,13 +31,10 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  // //Rimuove il token quando ci si disconnette
-  // logout() {
-  //   localStorage.removeItem('token');
-  // }
-
   //Controlla se utente è loggato
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
+
+
 }
