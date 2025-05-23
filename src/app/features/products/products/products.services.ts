@@ -8,9 +8,17 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  categoryId: string,
   stock: number;
   imageUrl: string;
+  category: {
+    _id: string;
+    name: string;
+    description: string;
+  };
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +32,7 @@ export class ProductService {
 
   //HTTP headers ed autorizzazioni di tipo Bearer. Il token è salvato nel localstorage.
   getProducts(): Observable<Product[]> {
+
     const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`
@@ -37,7 +46,13 @@ export class ProductService {
           description: p.description,
           price: p.price,
           stock: p.stock,
-          imageUrl: p.imageUrl
+          categoryId: p.categoryId,
+          imageUrl: p.imageUrl,
+          category: {
+            _id: p.id,
+            name: p.name,
+            description: p.description
+          }
         }))
       ),
       catchError(error => {
