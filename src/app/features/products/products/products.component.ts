@@ -74,7 +74,6 @@ import { FormsModule } from '@angular/forms';
 </mat-card>
 
   </div>
-</div>
   `
 })
 export class ProductsComponent implements OnInit {

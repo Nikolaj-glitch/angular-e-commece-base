@@ -36,50 +36,50 @@ export class ProductService {
 
     const token = localStorage.getItem("token");
     const headers = new HttpHeaders({
-      Authorization: Bearer ${ token }
+      Authorization: `Bearer ${token}`
     });
 
     //Implementiamo la richiesta di get e diamo anche l'autorizzazione.
     return this.http.get<any[]>(this.APIurl, { headers }).pipe(
-        map(products =>
-          products.map(p => ({
+      map(products =>
+        products.map(p => ({
+          _id: p.id,
+          name: p.name,
+          description: p.description,
+          price: p.price,
+          stock: p.stock,
+          categoryId: p.categoryId,
+          imageUrl: p.imageUrl,
+          category: {
             _id: p.id,
             name: p.name,
-            description: p.description,
-            price: p.price,
-            stock: p.stock,
-            categoryId: p.categoryId,
-            imageUrl: p.imageUrl,
-            category: {
-              _id: p.id,
-              name: p.name,
-              description: p.description
-            }
-          }))
-        ),
-        catchError(error => {
-          console.error('API error:', error);
-          return throwError(() => error);
-        })
-      );
+            description: p.description
+          }
+        }))
+      ),
+      catchError(error => {
+        console.error('API error:', error);
+        return throwError(() => error);
+      })
+    );
   }
-//Aggiorniamo il prodotto
-updateProduct(productId: string, productData: Partial<Product>): Observable < any > {
-  const token = localStorage.getItem("token");
+  //Aggiorniamo il prodotto
+  updateProduct(productId: string, productData: Partial<Product>): Observable<any> {
+    const token = localStorage.getItem("token");
 
-  const headers = new HttpHeaders({
-    Authorization: Bearer ${ token },
-    'Content-Type': 'application/json'
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
     });
 
-const url = ${ this.APIurl }/${productId};
-return this.http.put(url, productData, { headers }).pipe(
-  catchError(
-    error => {
-      console.error("Errore durante l'aggiornamento del prodotto", error)
-      return throwError(() => error)
-    }
-  )
-)
+    const url = `${this.APIurl}/ ${productId}`;
+    return this.http.put(url, productData, { headers }).pipe(
+      catchError(
+        error => {
+          console.error("Errore durante l'aggiornamento del prodotto", error)
+          return throwError(() => error)
+        }
+      )
+    )
   }
 }
