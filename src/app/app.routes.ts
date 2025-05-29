@@ -4,9 +4,11 @@ import { ProductsComponent } from './features/products/products/products.compone
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth.guard';
 import { OrderListComponent } from './features/order-list/order-list.component';
+import { OrderItemsComponent } from './features/order-items/order-items.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'api/products', component: ProductsComponent, canActivate: [authGuard] },
-  { path: 'orders', component: OrderListComponent }
+  { path: 'orders', component: OrderListComponent },
+  { path: 'items', component: OrderItemsComponent }
 ];
