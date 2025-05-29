@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 <div class="controls">
 
   <input type="text" [(ngModel)]="searchTerm" placeholder="Cerca prodotto" />
+
   <select [(ngModel)]="sortOption">
     <option value="">Ordina per</option>
     <option value="name">Nome</option>
@@ -144,7 +145,6 @@ export class ProductsComponent implements OnInit {
 
   editModeMap: { [id: string]: boolean } = {}; // Track which product is being edited
 
-  // Save the product using the ProductService
   saveProduct(product: Product): void {
     const { _id, name, price, description, stock } = product;
     const updatedFields = { name, price, description, stock }; // Only relevant fields
