@@ -18,6 +18,9 @@ export class AuthService {
     return this.http.post<{ token: string }>(this.apiUrl, null, {
       headers: { Authorization: 'Basic ' + btoa(credentials.name + ':' + credentials.password) },
     });
+  };
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token'); // oppure implementa una logica più sicura
   }
 }
 
