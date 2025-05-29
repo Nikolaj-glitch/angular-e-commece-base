@@ -72,7 +72,8 @@ export class ProductService {
       'Content-Type': 'application/json'
     });
 
-    const url = `${this.APIurl}/ ${productId}`;
+    const url = `${this.APIurl}/${productId}`;
+    console.log(url)
     return this.http.put(url, productData, { headers }).pipe(
       catchError(
         error => {

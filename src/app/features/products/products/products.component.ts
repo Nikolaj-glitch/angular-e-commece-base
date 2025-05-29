@@ -39,6 +39,7 @@ import { FormsModule } from '@angular/forms';
 </div>
 
    <!-- Card per i prodotti -->
+    <div class="product-grid">
   <mat-card class="product-card" *ngFor="let product of filteredProducts">
   <mat-card-header>
     <mat-card-title>
@@ -72,7 +73,7 @@ import { FormsModule } from '@angular/forms';
     <button *ngIf="editModeMap[product._id]" mat-button (click)="editModeMap[product._id] = false">Annulla</button>
   </mat-card-actions>
 </mat-card>
-
+</div>
   </div>
   `
 })
