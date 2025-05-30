@@ -15,37 +15,7 @@ import { OrderItem, Product, OrderItemService } from './order-items-services';
     FormsModule,
     NgFor],
   styleUrl: './order-items.component.scss',
-  template: `
-    <div>
-      <h1>Ordini</h1>
-      <div class="controls">
-        <input type="text" [(ngModel)]="searchTerm" placeholder="Cerca per nome prodotto" />
-        <select [(ngModel)]="sortOption">
-          <option value="">Ordina per</option>
-          <option value="product">Nome prodotto</option>
-          <option value="price">Prezzo totale</option>
-        </select>
-      </div>
-
-      <div class="product-grid">
-        <mat-card class="product-card" *ngFor="let item of filteredOrderItems">
-          <mat-card-header>
-            <mat-card-title>{{ item.product.name }}</mat-card-title>
-            <mat-card-subtitle>{{ item.price }} € ({{ item.quantity }} pz)</mat-card-subtitle>
-          </mat-card-header>
-
-          <img class="card-image" [src]="item.product.imageUrl" alt="{{ item.product.name }}" />
-
-          <mat-card-content>
-            <p>{{ item.product.description }}</p>
-            <p>Disponibilità: {{ item.product.stock }}</p>
-            <p>Ordine ID: {{ item.orderId }}</p>
-            <p>Email: {{ getEmailByOrderId(item.orderId) }}</p>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  `
+  templateUrl: './order-items.component.html',
 })
 export class OrderItemsComponent implements OnInit {
   orderItems: OrderItem[] = [];
