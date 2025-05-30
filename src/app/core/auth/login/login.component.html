@@ -1,1 +1,36 @@
+ <div class="centeredContent">
+      <form [formGroup]="login" (ngSubmit)="onSubmit()">
+        <p>Login</p>
 
+        <!-- Name Input -->
+        <input type="text" formControlName="name" placeholder="email" />
+        <div class="error-message-container">
+          <small
+            *ngIf="login.get('name')?.invalid && login.get('name')?.touched"
+          >
+            Il nome è richiesto e deve avere almeno 2 caratteri.
+          </small>
+        </div>
+
+        <!-- Password Input -->
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="password"
+        />
+        <div class="error-message-container">
+          <small
+            *ngIf="
+              login.get('password')?.invalid && login.get('password')?.touched
+            "
+          >
+            La password è richiesta e deve avere almeno 6 caratteri.
+          </small>
+        </div>
+
+        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+        <!-- Submit Button -->
+        <button type="submit" [disabled]="login.invalid">Conferma</button>
+      </form>
+    </div>

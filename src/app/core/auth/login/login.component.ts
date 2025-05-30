@@ -6,55 +6,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './auth.services';
 import { Router } from '@angular/router';
-import { response } from 'express';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   styleUrl: './login.component.scss',
-  template: `
-    <div class="centeredContent">
-      <form [formGroup]="login" (ngSubmit)="onSubmit()">
-        <p>Login</p>
-
-        <!-- Name Input -->
-        <input type="text" formControlName="name" placeholder="email" />
-        <div class="error-message-container">
-          <small
-            *ngIf="login.get('name')?.invalid && login.get('name')?.touched"
-          >
-            Il nome è richiesto e deve avere almeno 2 caratteri.
-          </small>
-        </div>
-
-        <!-- Password Input -->
-        <input
-          type="password"
-          formControlName="password"
-          placeholder="password"
-        />
-        <div class="error-message-container">
-          <small
-            *ngIf="
-              login.get('password')?.invalid && login.get('password')?.touched
-            "
-          >
-            La password è richiesta e deve avere almeno 6 caratteri.
-          </small>
-        </div>
-
-        <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
-
-        <!-- Submit Button -->
-        <button type="submit" [disabled]="login.invalid">Conferma</button>
-      </form>
-    </div>
-  `,
+  templateUrl: `login.component.html`
 })
 export class LoginComponent {
   // Devo controllare qui se il JWT token è il mio
