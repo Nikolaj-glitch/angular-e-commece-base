@@ -6,7 +6,7 @@
   .header {
     background-color: #333;
     color: white;
-    padding: 10px;
+    padding: 3px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -17,11 +17,13 @@
       border: none;
       color: white;
       cursor: pointer;
+      margin: 0;
     }
   }
 
   .header h1 {
     font-size: 15px;
+    margin: 0;
   }
 
   .layout-body {
@@ -77,7 +79,18 @@ div {
 }
 
 /* Pulsante Logout */
-button {
+.buttons {
+  background-color: blue;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.logout {
   background-color: #e53935;
   color: white;
   padding: 10px 16px;
@@ -88,7 +101,7 @@ button {
   margin-bottom: 20px;
 }
 
-button:hover {
+.logout:hover {
   background-color: #d32f2f;
 }
 

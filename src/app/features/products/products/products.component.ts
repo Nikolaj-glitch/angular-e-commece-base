@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 
   styleUrl: './products.component.scss',
   template: `
-    <div>
+    <div class="container">
       <h1>Prodotti</h1>
       <div class="controls">
         <input

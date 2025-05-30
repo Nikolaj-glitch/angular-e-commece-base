@@ -8,8 +8,14 @@
     <aside class="sidebar" [class.closed]="!sidebarOpen">
       <nav>
         <ul>
-          <li><a routerLink="/api/products">Prodotti</a></li>
-          <li><a (click)="logout()">Logout</a></li>
+          <li>
+            <button class="buttons" routerLink="/api/products">Prodotti</button>
+          </li>
+          <li>
+            <button class="buttons" routerLink="/orders">Prodotti</button>
+          </li>
+
+          <li><button class="logout" (click)="logout()">Logout</button></li>
         </ul>
       </nav>
     </aside>
