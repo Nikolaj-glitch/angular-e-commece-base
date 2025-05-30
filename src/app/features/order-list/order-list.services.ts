@@ -13,7 +13,7 @@ export interface Order {
   user: {
     _id: string;
     email: string;
-    isConfirmed: boolean; 
+    isConfirmed: boolean;
     isEnabled: boolean;
     isDeleted: boolean;
     createdAt: string;
@@ -66,5 +66,20 @@ export class OrderListService {
     );
 
   }
+
+  updateOrderStatus(orderId: string, status: string): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+
+    const url = `${this.apiOrders}/${orderId}`;
+    console.log(url)
+    const body = { status };
+
+    return this.http.put(url, body, { headers });
+  }
+
 
 }

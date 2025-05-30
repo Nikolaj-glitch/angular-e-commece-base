@@ -23,15 +23,28 @@ import { NgFor, NgIf } from '@angular/common';
     <div>
       <input type="text" [(ngModel)]="searchingEmail" (input)="applyFilter()" placeholder="Search by email" />
     </div>
+    <div *ngIf="totalCompletedRevenue > 0">
+  <strong>Total Revenue from Completed Orders:</strong> €{{ totalCompletedRevenue }}
+</div>
 
     <hr />
-
     <div *ngIf="filteredOrders.length === 0">No orders found.</div>
 
     <ul>
       <li *ngFor="let order of filteredOrders">
         <strong>Order Number:</strong> {{ order.orderNumber }}<br>
-        <strong>Status:</strong> {{ order.status }}<br>
+<strong>Status:</strong>
+<span *ngIf="!editStatusMap[order._id]">{{ order.status }}</span>
+<select *ngIf="editStatusMap[order._id]" [(ngModel)]="order.status">
+  <option value="pending">Pending</option>
+  <option value="completed">completed</option>
+  <option value="cancelled">Cancelled</option>
+</select>
+<br />
+
+<button *ngIf="!editStatusMap[order._id]" (click)="editStatusMap[order._id] = true">Edit Status</button>
+<button *ngIf="editStatusMap[order._id]" (click)="saveOrderStatus(order)">Save</button>
+<button *ngIf="editStatusMap[order._id]" (click)="editStatusMap[order._id] = false">Cancel</button>
         <strong>Total Amount:</strong> {{ order.totalAmount }}<br>
         <strong>User Email:</strong> {{ order.user.email }}<br>
         <strong>Created At:</strong> {{ order.user.createdAt }}<br>
@@ -47,6 +60,7 @@ import { NgFor, NgIf } from '@angular/common';
         <hr />
       </li>
     </ul>
+
   `,
   styleUrl: './order-list.component.scss'
 })
@@ -55,6 +69,8 @@ export class OrderListComponent implements OnInit {
   filteredOrders: Order[] = [];
   selectedStatus: string = '';
   searchingEmail: string = '';
+  totalCompletedRevenue: number = 0;
+  editStatusMap: { [id: string]: boolean } = {}; // track which order is being edited
 
   constructor(
     private orderListService: OrderListService,
@@ -83,8 +99,20 @@ export class OrderListComponent implements OnInit {
         orderItems: itemsGroupedByOrderId[order._id] || []
       }));
 
+      this.calculateCompletedRevenue();
       this.applyFilter();
     });
+  }
+
+  calculateCompletedRevenue(): void {
+    this.totalCompletedRevenue = this.allOrders
+      .filter(order => order.status === 'completed')
+      .reduce((sum, order) => {
+        const orderTotal = order.orderItems?.reduce((itemSum, item) => {
+          return itemSum + (item.quantity * item.price);
+        }, 0) || 0;
+        return sum + orderTotal;
+      }, 0);
   }
 
   applyFilter(): void {
@@ -96,4 +124,17 @@ export class OrderListComponent implements OnInit {
       return matchesStatus && matchesEmail;
     });
   }
+
+  saveOrderStatus(order: Order): void {
+    this.orderListService.updateOrderStatus(order._id, order.status).subscribe({
+      next: () => {
+        console.log('Order status updated');
+        this.editStatusMap[order._id] = false;
+      },
+      error: (err) => {
+        console.error('Error updating order status:', err);
+      }
+    });
+  }
+
 }
