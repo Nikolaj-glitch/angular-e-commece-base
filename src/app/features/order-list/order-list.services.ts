@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map, Observable, Timestamp } from 'rxjs';
 import { environment } from '../../../environment';
 
-
 export interface Order {
   _id: string;
   orderNumber: string;
@@ -20,31 +19,26 @@ export interface Order {
     updatedAt: string;
   };
   orderItems: any[];
-  id: string
+  id: string;
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class OrderListService {
-
-
   private apiOrders = environment.apiOrders;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getOrders(): Observable<Order[]> {
-
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
+      Authorization: `Bearer ${token}`,
     });
 
     return this.http.get<any[]>(this.apiOrders, { headers }).pipe(
-      map(orders =>
-        orders.map(order => ({
+      map((orders) =>
+        orders.map((order) => ({
           _id: order._id,
           orderNumber: order.orderNumber,
           userId: order.userId,
@@ -60,26 +54,23 @@ export class OrderListService {
             updatedAt: order.user.updatedAt,
           },
           orderItems: order.orderItems,
-          id: order.orderItemId
+          id: order.orderItemId,
         }))
       )
     );
-
   }
 
   updateOrderStatus(orderId: string, status: string): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
 
     const url = `${this.apiOrders}/${orderId}`;
-    console.log(url)
+    console.log(url);
     const body = { status };
 
     return this.http.put(url, body, { headers });
   }
-
-
 }
