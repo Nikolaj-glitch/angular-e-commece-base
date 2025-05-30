@@ -1,0 +1,18 @@
+<div class="layout">
+  <header class="header">
+    <button class="menu-toggle" (click)="toggleSideBar()">☰</button>
+    <h1>E-Commerce Admin</h1>
+  </header>
+
+  <div class="layout-body">
+    <aside class="sidebar" [class.closed]="!sidebarOpen">
+      <nav>
+        <ul>
+          <li><a routerLink="/api/products">Prodotti</a></li>
+          <li><a (click)="logout()">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <router-outlet></router-outlet>
+  </div>
+</div>

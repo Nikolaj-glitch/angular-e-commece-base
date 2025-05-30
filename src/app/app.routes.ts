@@ -5,11 +5,19 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { authGuard } from './core/guards/auth.guard';
 import { OrderListComponent } from './features/order-list/order-list.component';
 import { OrderItemsComponent } from './features/order-items/order-items.component';
+import { LayoutComponent } from './layout/layout.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'api/products', component: ProductsComponent, canActivate: [authGuard] },
-  { path: 'orders', component: OrderListComponent },
-  { path: 'items', component: OrderItemsComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      { path: 'api/products', component: ProductsComponent },
+      { path: 'orders', component: OrderListComponent },
+      { path: 'items', component: OrderItemsComponent },
+      { path: 'dashboard', component: DashboardComponent },
+    ],
+  },
 ];

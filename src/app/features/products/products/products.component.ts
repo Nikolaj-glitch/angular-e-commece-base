@@ -9,77 +9,108 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [
-    MatDividerModule,
-    MatCardModule,
-    FormsModule,
-    NgFor,
-    NgIf
-  ],
+  imports: [MatDividerModule, MatCardModule, FormsModule, NgFor, NgIf],
 
   styleUrl: './products.component.scss',
   template: `
     <div>
-  <button (click)="logout()">Logout</button>
-  <h1>Prodotti</h1>
-  <!-- filtro -->
-<div class="controls">
+      <h1>Prodotti</h1>
+      <div class="controls">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Cerca prodotto"
+        />
 
-  <input type="text" [(ngModel)]="searchTerm" placeholder="Cerca prodotto" />
+        <select [(ngModel)]="sortOption">
+          <option value="">Ordina per</option>
+          <option value="name">Nome</option>
+          <option value="price">Prezzo</option>
+        </select>
 
-  <select [(ngModel)]="sortOption">
-    <option value="">Ordina per</option>
-    <option value="name">Nome</option>
-    <option value="price">Prezzo</option>
-  </select>
+        <select [(ngModel)]="selectedCategory">
+          <option [ngValue]="null">Categoria</option>
+          <option *ngFor="let cat of categories" [value]="cat.id">
+            {{ cat.name }}
+          </option>
+        </select>
+      </div>
 
-  <select [(ngModel)]="selectedCategory">
-     <option [ngValue]="null">Categoria</option>
-    <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.name }}</option>
-  </select>
-</div>
+      <div class="product-grid">
+        <mat-card class="product-card" *ngFor="let product of filteredProducts">
+          <mat-card-header>
+            <mat-card-title>
+              <span *ngIf="!editModeMap[product._id]">{{ product.name }}</span>
+              <input
+                *ngIf="editModeMap[product._id]"
+                [(ngModel)]="product.name"
+              />
+            </mat-card-title>
+            <mat-card-subtitle>
+              <span *ngIf="!editModeMap[product._id]">{{ product.price }}</span>
+              <input
+                *ngIf="editModeMap[product._id]"
+                [(ngModel)]="product.price"
+                type="number"
+              />
+            </mat-card-subtitle>
+          </mat-card-header>
 
-   <!-- Card per i prodotti -->
-    <div class="product-grid">
-  <mat-card class="product-card" *ngFor="let product of filteredProducts">
-  <mat-card-header>
-    <mat-card-title>
-      <span *ngIf="!editModeMap[product._id]">{{ product.name }}</span>
-      <input *ngIf="editModeMap[product._id]" [(ngModel)]="product.name" />
-    </mat-card-title>
-    <mat-card-subtitle>
-      <span *ngIf="!editModeMap[product._id]">{{ product.price }}</span>
-      <input *ngIf="editModeMap[product._id]" [(ngModel)]="product.price" type="number" />
-    </mat-card-subtitle>
-  </mat-card-header>
+          <img
+            class="card-image"
+            [src]="product.imageUrl"
+            alt="{{ product.name }}"
+          />
 
-  <img class="card-image" [src]="product.imageUrl" alt="{{ product.name }}">
+          <mat-card-content>
+            <p>Categoria: {{ getCategoryName(product.categoryId) }}</p>
 
-  <mat-card-content>
-    <p>Categoria: {{ getCategoryName(product.categoryId) }}</p>
+            <p *ngIf="!editModeMap[product._id]">{{ product.description }}</p>
+            <textarea
+              *ngIf="editModeMap[product._id]"
+              [(ngModel)]="product.description"
+            ></textarea>
 
-    <p *ngIf="!editModeMap[product._id]">{{ product.description }}</p>
-    <textarea *ngIf="editModeMap[product._id]" [(ngModel)]="product.description"></textarea>
+            <p>
+              Disponibilità:
+              <span *ngIf="!editModeMap[product._id]">{{ product.stock }}</span>
+              <input
+                *ngIf="editModeMap[product._id]"
+                [(ngModel)]="product.stock"
+                type="number"
+              />
+            </p>
+          </mat-card-content>
 
-    <p>
-      Disponibilità:
-      <span *ngIf="!editModeMap[product._id]">{{ product.stock }}</span>
-      <input *ngIf="editModeMap[product._id]" [(ngModel)]="product.stock" type="number" />
-    </p>
-  </mat-card-content>
-
-  <mat-card-actions>
-    <button *ngIf="!editModeMap[product._id]" mat-button (click)="editModeMap[product._id] = true">Modifica</button>
-    <button *ngIf="editModeMap[product._id]" mat-button (click)="saveProduct(product)">Salva</button>
-    <button *ngIf="editModeMap[product._id]" mat-button (click)="editModeMap[product._id] = false">Annulla</button>
-  </mat-card-actions>
-</mat-card>
-</div>
-  </div>
-  `
+          <mat-card-actions>
+            <button
+              *ngIf="!editModeMap[product._id]"
+              mat-button
+              (click)="editModeMap[product._id] = true"
+            >
+              Modifica
+            </button>
+            <button
+              *ngIf="editModeMap[product._id]"
+              mat-button
+              (click)="saveProduct(product)"
+            >
+              Salva
+            </button>
+            <button
+              *ngIf="editModeMap[product._id]"
+              mat-button
+              (click)="editModeMap[product._id] = false"
+            >
+              Annulla
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  `,
 })
 export class ProductsComponent implements OnInit {
-
   products: Product[] = [];
   categories: Category[] = [];
 
@@ -92,7 +123,7 @@ export class ProductsComponent implements OnInit {
     private productService: ProductService,
     private getCategorService: Getcategory,
     private router: Router
-  ) { }
+  ) {}
 
   //ngOnInit -> All'avvio della pagina
   ngOnInit(): void {
@@ -100,23 +131,22 @@ export class ProductsComponent implements OnInit {
       next: (data) => {
         this.products = data;
       },
-      error: (err) => console.error("Errore prodotti: ", err)
+      error: (err) => console.error('Errore prodotti: ', err),
     });
 
     this.getCategorService.getCategory().subscribe({
       next: (data) => {
         this.categories = data;
       },
-      error: (err) => console.error("Errore categorie: ", err)
+      error: (err) => console.error('Errore categorie: ', err),
     });
   }
 
   //Otteniamo l'id corretto della categoria
   getCategoryName(categoryId: string): string {
-    const cat = this.categories.find(c => c.id === categoryId);
+    const cat = this.categories.find((c) => c.id === categoryId);
     return cat ? cat.name : 'Categoria sconosciuta';
   }
-
 
   //Filtro prodotti
   get filteredProducts(): Product[] {
@@ -124,14 +154,14 @@ export class ProductsComponent implements OnInit {
 
     // Filter by search term
     if (this.searchTerm.trim()) {
-      filtered = filtered.filter(p =>
+      filtered = filtered.filter((p) =>
         p.name.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
 
     // Filter by selected category
     if (this.selectedCategory) {
-      filtered = filtered.filter(p => p.categoryId === this.selectedCategory);
+      filtered = filtered.filter((p) => p.categoryId === this.selectedCategory);
     }
 
     // Sort
@@ -154,13 +184,7 @@ export class ProductsComponent implements OnInit {
         console.log('Prodotto aggiornato con successo.');
         this.editModeMap[_id] = false;
       },
-      error: err => console.error('Errore durante il salvataggio:', err)
+      error: (err) => console.error('Errore durante il salvataggio:', err),
     });
-  }
-
-
-  logout(): void {
-    localStorage.removeItem("token");
-    this.router.navigate(['']);
   }
 }
