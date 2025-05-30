@@ -70,7 +70,7 @@ export class OrderListComponent implements OnInit {
   selectedStatus: string = '';
   searchingEmail: string = '';
   totalCompletedRevenue: number = 0;
-  editStatusMap: { [id: string]: boolean } = {}; // track which order is being edited
+  editStatusMap: { [id: string]: boolean } = {};
 
   constructor(
     private orderListService: OrderListService,
