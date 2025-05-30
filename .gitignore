@@ -40,3 +40,10 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+/.angular
+
+.env
+environment.ts
+package-lock.json
+package.json

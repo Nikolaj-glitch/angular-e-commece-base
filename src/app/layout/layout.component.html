@@ -1,0 +1,28 @@
+<div class="layout">
+  <header class="header">
+    <button class="menu-toggle" (click)="toggleSideBar()">☰</button>
+    <h1>E-Commerce Admin</h1>
+  </header>
+
+  <div class="layout-body">
+    <aside class="sidebar" [class.closed]="!sidebarOpen">
+      <nav>
+        <ul>
+          <li>
+            <button class="buttons" (click)="goTo('/dashboard')">
+              Dashboard
+            </button>
+          </li>
+          <li>
+            <button class="buttons" (click)="goTo('/orders')">Ordini</button>
+          </li>
+          <li>
+            <button class="buttons" (click)="goTo('/items')">Items</button>
+          </li>
+          <li><button class="logout" (click)="logout()">Logout</button></li>
+        </ul>
+      </nav>
+    </aside>
+    <router-outlet></router-outlet>
+  </div>
+</div>
