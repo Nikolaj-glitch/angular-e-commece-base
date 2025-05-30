@@ -91,7 +91,7 @@ export class LoginComponent {
         if (token) {
           localStorage.setItem('token', token);
           console.log('Login avvenuto con successo!', token);
-          this.router.navigate(['/api/products']);
+          this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = 'Token mancante nella risposta.';
         }
