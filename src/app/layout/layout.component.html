@@ -9,12 +9,16 @@
       <nav>
         <ul>
           <li>
-            <button class="buttons" routerLink="/api/products">Prodotti</button>
+            <button class="buttons" (click)="goTo('/dashboard')">
+              Dashboard
+            </button>
           </li>
           <li>
-            <button class="buttons" routerLink="/orders">Prodotti</button>
+            <button class="buttons" (click)="goTo('/orders')">Ordini</button>
           </li>
-
+          <li>
+            <button class="buttons" (click)="goTo('/items')">Items</button>
+          </li>
           <li><button class="logout" (click)="logout()">Logout</button></li>
         </ul>
       </nav>

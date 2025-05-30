@@ -32,28 +32,22 @@
   }
 
   .sidebar {
-    width: 250px;
+    padding-top: 20px;
+    padding-left: 20px;
+
+    width: 200px;
     background-color: #444;
     color: white;
     transition: width 0.3s ease;
     overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
 
     nav ul {
+      margin-top: 10px;
       list-style: none;
       padding: 0;
       margin: 0;
-
-      li a {
-        display: block;
-        padding: 1rem;
-        color: white;
-        text-decoration: none;
-        transition: background 0.3s;
-
-        &:hover {
-          background-color: #555;
-        }
-      }
     }
 
     &.closed {
@@ -80,7 +74,7 @@ div {
 
 /* Pulsante Logout */
 .buttons {
-  background-color: blue;
+  background-color: grey;
   color: white;
   padding: 10px 16px;
   border: none;
