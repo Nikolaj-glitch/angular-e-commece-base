@@ -32,9 +32,6 @@
   }
 
   .sidebar {
-    padding-top: 20px;
-    padding-left: 20px;
-
     width: 200px;
     background-color: #444;
     color: white;
@@ -44,9 +41,9 @@
     justify-content: flex-start;
 
     nav ul {
-      margin-top: 10px;
       list-style: none;
-      padding: 0;
+      padding: 10px;
+      padding-top: 20px;
       margin: 0;
     }
 
