@@ -1,112 +1,24 @@
-/* Contenitore filtro e ricerca */
-.filter-container {
-  display: flex;
-  flex-wrap: wrap;
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
-  margin-bottom: 20px;
-  align-items: center;
+  padding: 10;
+  max-width: 1200px;
+  margin: 10px;
 }
 
-.filter-container label {
-  font-weight: bold;
-  margin-right: 8px;
-}
 
-.filter-container select,
-.filter-container input[type="text"] {
-  padding: 8px 12px;
-  font-size: 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  min-width: 200px;
-  transition: border-color 0.3s;
-}
-
-.filter-container select:focus,
-.filter-container input[type="text"]:focus {
-  border-color: #1976d2;
-  outline: none;
-}
-
-/* Messaggi informativi */
-.info-message {
-  margin-bottom: 15px;
-  font-weight: bold;
-  color: #2e7d32;
-}
-
-.no-orders {
-  color: #777;
-  font-style: italic;
-  margin-top: 10px;
-}
-
-/* Lista ordini */
-.order-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Singolo ordine */
-.order-item {
+.order-card {
   background-color: #f9f9f9;
+  border: 2px solid black;
   border-radius: 10px;
   padding: 16px;
-  margin-bottom: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.order-item strong {
-  color: #333;
-}
-
-/* Dropdown status */
-.order-item select {
-  padding: 6px 10px;
-  font-size: 14px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  margin-top: 4px;
-}
-
-/* Pulsanti */
-.order-item button {
-  margin-right: 8px;
-  margin-top: 8px;
-  padding: 6px 12px;
-  font-size: 14px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.order-item button:hover {
-  opacity: 0.9;
-}
-
-.order-item button:nth-child(1) {
-  background-color: #1976d2;
-  color: white;
-}
-
-.order-item button:nth-child(2) {
-  background-color: #388e3c;
-  color: white;
-}
-
-.order-item button:nth-child(3) {
-  background-color: #e53935;
-  color: white;
-}
-
-/* Lista items ordine */
-.order-item ul {
-  padding-left: 20px;
-  margin-top: 8px;
-}
-
-.order-item p {
-  margin: 4px 0;
+body {
+  margin: 10px;
 }

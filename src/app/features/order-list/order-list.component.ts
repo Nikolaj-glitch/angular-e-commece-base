@@ -25,8 +25,9 @@ export class OrderListComponent implements OnInit {
 
   constructor(
     private orderListService: OrderListService,
-    private orderItemService: OrderItemService
-  ) {}
+    private orderItemService: OrderItemService,
+
+  ) { }
 
   ngOnInit(): void {
     //La fork ci permette di gestire più API allo stesso momento
@@ -56,13 +57,13 @@ export class OrderListComponent implements OnInit {
   }
 
   calculateCompletedRevenue(): void {
+
     this.totalCompletedRevenue = this.allOrders
-      .filter((order) => order.status === 'completed')
+      .filter(order => order.status === 'completed')
       .reduce((sum, order) => {
-        const orderTotal =
-          order.orderItems?.reduce((itemSum, item) => {
-            return itemSum + item.quantity * item.price;
-          }, 0) || 0;
+        const orderTotal = order.orderItems?.reduce((itemSum, item) => {
+          return itemSum + (item.quantity * item.price);
+        }, 0) || 0;
         return sum + orderTotal;
       }, 0);
   }
@@ -74,8 +75,8 @@ export class OrderListComponent implements OnInit {
         : true;
       const matchesEmail = this.searchingEmail
         ? order.user.email
-            .toLowerCase()
-            .includes(this.searchingEmail.toLowerCase())
+          .toLowerCase()
+          .includes(this.searchingEmail.toLowerCase())
         : true;
       return matchesStatus && matchesEmail;
     });
@@ -86,10 +87,12 @@ export class OrderListComponent implements OnInit {
       next: () => {
         console.log('Order status updated');
         this.editStatusMap[order._id] = false;
+        this.calculateCompletedRevenue()
       },
       error: (err) => {
         console.error('Error updating order status:', err);
-      },
+      }
     });
   }
+
 }

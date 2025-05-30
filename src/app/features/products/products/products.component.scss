@@ -2,6 +2,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 1.5rem;
+  margin: 10px;
+
   /*padding: 1rem;*/
 }
 
@@ -17,6 +19,7 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -63,7 +66,8 @@
 .controls input[type="text"]:focus,
 .controls select:focus {
   outline: none;
-  border-color: #3f51b5; /* Material Indigo */
+  border-color: #3f51b5;
+  /* Material Indigo */
   box-shadow: 0 0 5px rgba(63, 81, 181, 0.4);
 }
 
