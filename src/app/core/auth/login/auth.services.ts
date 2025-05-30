@@ -9,6 +9,7 @@ import { environment } from '../../../../environment';
 // --- SERVICE ---
 
 @Injectable({ providedIn: 'root' })
+
 export class AuthService {
   private apiUrl = environment.apiLogin; // metti la tua API
 
@@ -85,11 +86,10 @@ export class AuthEffects {
   );
 
   saveToken$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(loginSuccess),
-        tap(({ token }) => localStorage.setItem('token', token))
-      ),
+    () => this.actions$.pipe(
+      ofType(loginSuccess),
+      tap(({ token }) => localStorage.setItem('token', token))
+    ),
     { dispatch: false }
   );
 
@@ -116,7 +116,6 @@ export class LoginComponent {
   constructor(private store: Store) { }
 
   doLogin() {
-    // esempio: username e password hardcoded
     this.store.dispatch(login({ username: 'admin', password: '1234' }));
   }
 

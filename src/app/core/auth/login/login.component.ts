@@ -85,16 +85,22 @@ export class LoginComponent {
       return;
     }
 
-    //Usato authService.login() dentro onSubmit(), così la richiesta va al server.
     this.authservice.login(this.login.value).subscribe({
-      next: () => {
-        console.log('Login avvenuto con successo!', this.login.value);
-        this.router.navigate(['/api/products']); //per ora ho messo dashboard una volt avvenuto il login poi vediamo
+      next: (response) => {
+        const token = response.token;
+        if (token) {
+          localStorage.setItem('token', token);
+          console.log('Login avvenuto con successo!', token);
+          this.router.navigate(['/api/products']);
+        } else {
+          this.errorMessage = 'Token mancante nella risposta.';
+        }
       },
       error: (err) => {
-        console.error('errore autenticazione', err);
+        console.error('Errore autenticazione', err);
         this.errorMessage = 'Credenziali non valide. Riprova.';
       },
     });
   }
+
 }

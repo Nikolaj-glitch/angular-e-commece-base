@@ -10,5 +10,6 @@ export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'api/products', component: ProductsComponent, canActivate: [authGuard] },
   { path: 'orders', component: OrderListComponent },
-  { path: 'items', component: OrderItemsComponent }
+  { path: 'items', component: OrderItemsComponent },
+  { path: 'dashboard', component: DashboardComponent }
 ];

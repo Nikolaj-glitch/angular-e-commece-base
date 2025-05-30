@@ -13,9 +13,7 @@ import { OrderItem, Product, OrderItemService } from './order-items-services';
     MatCardModule,
     MatDividerModule,
     FormsModule,
-    NgFor,
-    NgIf
-  ],
+    NgFor],
   styleUrl: './order-items.component.scss',
   template: `
     <div>
