@@ -1,28 +1,94 @@
-# ECommerce
+📦 Angular e-commerce
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.12.
+Angular e-commerce is a web platform for managing and selling products online. It allows users to browse a product catalog, perform searches, view, and manage orders easily.
 
-## Development server
+🚀 Technologies used
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+    Angular (version 17)
+    TypeScript
+    RxJS
+    Angular CLI
 
-## Code scaffolding
+⚙️ Installation
+Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    Node.js (version >= 20.10.0)
 
-## Build
+    Angular CLI (npm install -g @angular/cli)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Clone the project
 
-## Running unit tests
+git clone https://github.com/Nikolaj-glitch/angular-e-commece-base.git
+cd angular-e-commece-base.git
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Install dependencies
 
-## Running end-to-end tests
+npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Start the application locally
 
-## Further help
+ng serve
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# angular-e-commece-base
+The app will be available at http://localhost:4200.
+
+🧪 Running tests
+
+ng test
+
+📁 Project structure
+
+angular-e-commece-base/
+│
+├── src/
+│ ├── app/
+│ │ ├── core/
+│ │ │ ├── auth/
+│ │ │ │ └── login/
+│ │ │ │ └── login.component.ts
+│ │ │ └── guards/
+│ │ │ └── auth.guard.ts
+│ │ ├── features/
+│ │ │ ├── dashboard/
+│ │ │ │ └── dashboard.component.ts
+│ │ │ ├── order-list/
+│ │ │ │ ├── order-list.component.ts
+│ │ │ │ ├── order-list.component.html
+│ │ │ │ └── order-list.component.scss
+│ │ │ └── products/
+│ │ │ └── products/
+│ │ │ └── products.component.ts
+│ │ ├── app.component.ts
+│ │ ├── app.component.html
+│ │ ├── app.component.scss
+│ │ ├── app.routes.ts
+│ │ └── app.config.ts
+│ ├── assets/
+│ └── index.html
+├── README.md
+├── angular.json
+├── package.json
+└── tsconfig.json
+
+✨ Main features
+
+    ✅ Product catalog
+
+    ✅ Order viewing
+
+    ✅ Search with filters
+
+    ✅ Product management
+
+🔧 Configuration
+
+In "src/" add a file called "environment.ts" with the API URLs
+
+📦 Production build
+
+ng build --configuration production
+
+👤 Authors
+
+    Nicola Mola - @Oogway03
+    Nikolaj Aprea - @Nikolaj-glitch
+    Michele Boninelli - @micboni
